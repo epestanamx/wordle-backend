@@ -1,20 +1,21 @@
-import express from 'express';
-import morgan from 'morgan';
-import cors from 'cors';
+import 'reflect-metadata';
+import 'dotenv/config';
+import app from './app';
+import { AppDataSource } from './db';
 
-const app = express();
+async function main() {
+  try {
+    await AppDataSource.initialize();
+    console.log('Database connected');
 
-app.use(morgan('dev'));
-app.use(cors());
+    const port = process.env.SERVER_PORT || 3000;
 
-app.get('/', (req, res) => {
-  return res.status(200).send({
-    name: 'wordle-backend',
-    version: '1.0.0',
-    description: 'Wordle Backend',
-  });
-});
+    app.listen(port, () => {
+      console.log('Server is listen on port', port);
+    });
+  } catch (e) {
+    console.error(e);
+  }
+}
 
-app.listen(3000, () => {
-  console.log('Server is listen on port', 3000);
-});
+main();
