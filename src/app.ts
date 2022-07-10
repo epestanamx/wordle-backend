@@ -14,7 +14,7 @@ app.use(cors());
 app.use(express.json());
 app.use(router);
 
-cron.schedule('* * * * *', async () => {
+cron.schedule('* */5 * * *', async () => {
   await WordEntity.update({ current: true }, { current: false });
 
   const word = await AppDataSource.getRepository(WordEntity)
@@ -28,9 +28,9 @@ cron.schedule('* * * * *', async () => {
   if (word) {
     word.available = false;
     word.current = true;
-    
+
     await AppDataSource.getRepository(WordEntity).save(word);
-    await UserEntity.update({}, { attempts: 0 });
+    return UserEntity.update({}, { attempts: 0 });
   }
 
   console.log('running a task every 5 minute');

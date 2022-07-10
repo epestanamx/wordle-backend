@@ -74,3 +74,29 @@ export const playGame = async (req: any, res: Response) => {
 
   return res.status(200).send(response);
 };
+
+export const topWords = async (req: any, res: Response) => {
+  const topWords =
+    await GameEntity.query(`select w.word as word, count(1) as total
+from games g
+inner join words w on g.word_id = w.id
+where g.won = true
+group by w.word
+order by count(1) desc
+limit 10`);
+
+  return res.status(200).send(topWords);
+};
+
+export const topUsers = async (req: any, res: Response) => {
+  const topUsers =
+    await GameEntity.query(`select u.id, u.name, count(1) as total
+from games g
+inner join users u on g.user_id  = u.id
+where g.won  = true
+group by u.id, u.name
+order by count(1) desc
+limit 10`);
+
+  return res.status(200).send(topUsers);
+};
