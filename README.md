@@ -22,4 +22,5 @@ Puedes consultar la documentación de esta API en la siguiente URL [https://docu
 Se incluyen 2 propuestas para la creación de la base de datos
 
 1.- Se incluye el archivo "wordle-backup" el cual es un respaldo de base de datos de postgresql, por lo que se puede usar para montar la base de datos.
+
 2.- Al ejecutar el proyecto por primera vez se crea la estructura de la base de datos, sin embargo hay que llenar la tabla words de forma manual, para lo que se incluye el archivo "insert-words.sql"
