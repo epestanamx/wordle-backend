@@ -9,10 +9,10 @@ export class WordEntity extends BaseEntity {
   @Column()
     word: string;
 
-  @Column()
+  @Column({ default: true })
     available: boolean;  
 
-  @Column()
+  @Column({ default: false })
     current: boolean;
 
   @OneToMany(() => GameEntity, (game: GameEntity) => game.user)
