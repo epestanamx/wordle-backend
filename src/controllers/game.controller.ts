@@ -13,7 +13,7 @@ export const playGame = async (req: any, res: Response) => {
 
   if (userWord.length !== 5) {
     return res.status(400).send({
-      error: 'The word must be 5 characters long',
+      message: 'The word must be 5 characters long',
     });
   }
 
@@ -25,7 +25,7 @@ export const playGame = async (req: any, res: Response) => {
 
   if (user?.attempts && user?.attempts >= 5) {
     return res.status(400).send({
-      error: 'You have reached the maximum number of attempts',
+      message: 'You have reached the maximum number of attempts',
     });
   }
 
